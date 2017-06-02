@@ -1,0 +1,210 @@
+<%- include header.html %>
+<link rel="stylesheet" href="/stylesheets/personalpage.css" type="text/css" />
+<script src="/javascripts/personalpagemenu.js"></script>
+
+<div id="content">
+	<div id="lineleft"></div>
+	<div id="lineleft2"></div>
+	<div id="lineleft3"></div>
+	<div id="lineleft4"></div>
+	<div id="lineleft5"></div>
+	<div id="lineleft6"></div>
+	<div id="lineleft7"></div>
+	
+
+	<div id="left-content">
+		<div id="my-image">
+			<ul>
+				<li><img src="<%=user.headimg%>"></li>
+				<% if(user.nickname==null) { %>
+				<li>昵称：<%=user.name%></li>
+				<%}else{%>
+				<li>昵称：<%=user.nickname%></li>
+				<%}%>
+			</ul>
+		</div>
+
+		<div class="treebox">
+	  		<ul class="menu">
+				<li class="level1">
+					<a href="#none"></em>我的图集<i></i></a>
+					<ul class="level2">
+						<li><a href="/personalpage?keyword=个人照片">个人相片</a></li>
+						<li><a href="/personalpage?keyword=我的收藏">我的收藏</a></li>
+					</ul>
+				</li>
+				<li class="level1">
+					<a href="#none"></em>信息修改<i></i></a>
+					<ul class="level2">
+						<li><a id="uploadmyimg" href="javascript:;">更新个人图像</a></li>
+						<li><a id="modifypassword" href="javascript:;">修改密码</a></li>
+						<li><a id="setnickname" href="javascript:;">设置昵称</a></li>
+					</ul>
+				</li>
+				<li class="level1">
+					<a href="#none"></em>图集欣赏<i></i></a>
+					<ul class="level2">
+						<li><a href="/photoshow">小窗口展示</a></li>
+						<li><a href="/photoshow2">全屏展示</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div id="search-img">
+				<input id="inputkeyword" type="text" placeholder="请输入要搜索的内容" name="searchimg">
+				<a id="submitkeyword" href="#" ></a>			
+		</div>
+
+		<div id="yema">
+			<p id="totalpage">当前页：<%=page%>&nbsp总页数：<%=totalpage%></p>
+			<div id="prev"><a href="/personalpage?p=<%=(page-1)>0?(page-1):1%>&keyword=<%=keyword%>">上一页</a></div>
+			<div id="next"><a href="/personalpage?p=<%=(page+1)>totalpage?totalpage:(page+1)%>&keyword=<%=keyword%>">下一页</a></div>
+			<input id="jumpdate" type="text" placeholder="请输入页码" name="">
+			<a id="jump" href="#">跳  转</a>
+		</div>
+
+	</div>
+	<div id="right-content">
+		<div id="lanrenzhijia">
+			<% if(images.length !=0){%>
+			<% images.forEach(function(item,index){%>
+   			  <div class="lanren">
+     			 <img class="lazy" src="<%=item.photoaddress %>" data-original="<%=item.photoaddress%>" />
+     			 <a href="#"><%=item.photoname %></a>
+     			 &nbsp
+     			 <a href="/download/image/<%=item._id%>">下载</a>
+  			  </div>
+  			<%})}else{%>
+  				<a href='/upload/photos' style="width: 100px; height: 100px; border: 1px solid #119; box-shadow: inset 0px 0px 10px #119; line-height: 100px; text-align: center; font: 20px; display: block; margin:50px auto;">上传图片</a>
+  			<%}%>
+		</div>
+	</div>
+
+</div>
+
+
+<script src="/javascripts/photogallery-jquery.lazyload.min.js"></script>
+<script src="/javascripts/photogallery-blocksit.min.js"></script>
+
+<script>
+  $(function(){
+  	
+
+  	var page = <%=page%>
+  	var totalpage = <%=totalpage%>
+  	var keyword1 = '<%=keyword%>'
+  	//页码控制
+  	$("#jumpdate").change(function(){
+  		var val = $(this).val()
+  		var reg = /[^\d]/g;
+  		if(reg.test(val))
+  		{
+  			$(this).val(val.replace(reg, ''))
+  		}
+  		if(parseInt(val)> totalpage)
+  		{
+  			$(this).val(totalpage)
+  		}
+  		if(parseInt(val)===0)
+  		{
+  			$(this).val(1)
+  		}
+  		var w =$(this).val()
+  		if(w>totalpage)
+  		{
+  			w=totalpage
+  		}
+  		if(keyword1==="")
+  		{
+			$("#jump").attr('href','/personalpage?p='+w+'')
+		}else
+		{
+			$("#jump").attr('href','/personalpage?p='+w+'&keyword='+keyword1+'')
+		}
+
+  	})
+  	
+	$("#jump").click(function(){
+		if($.trim($("#jumpdate").val())=='')
+		{
+			return false
+		}
+	})
+	
+
+  	$("#prev a").click(function(){
+  		if(page==1)
+  		{
+  			return false
+  		}
+  	})
+  	$("#next a").click(function(){
+  		if(page==totalpage)
+  		{
+  			return false
+  		}
+  	})
+  	//搜索控制
+  	$("#submitkeyword").click(function(){
+  		if($.trim($("#inputkeyword").val())=='')
+  		{
+  			return false
+  		}
+  	})
+  	$("#inputkeyword").change(function(){
+  		$("#submitkeyword").attr('href','/personalpage?p=1&keyword='+$("#inputkeyword").val()+'')
+  	})
+  	
+    $(".nav").movebg({width:240/*滑块的大小*/,extra:40/*额外反弹的距离*/,speed:300/*滑块移动的速度*/,rebound_speed:400/*滑块反弹的速度*/});
+    
+    $(".treebox .level1>a").click(function(){
+		$(this).addClass('current')   //给当前元素添加"current"样式
+		.find('i').addClass('down')   //小箭头向下样式
+		.parent().next().slideDown('slow','easeOutQuad')  //下一个元素显示
+		.parent().siblings().children('a').removeClass('current')//父元素的兄弟元素的子元素去除"current"样式
+		.find('i').removeClass('down').parent().next().slideUp('slow','easeOutQuad')//隐藏
+		 return false; //阻止默认时间
+	});
+
+	$("#uploadmyimg").click(function(){
+		var htmlobj=$.ajax({url:"/html/uploadmyimg.html",async:false})
+		//alert(htmlobj.responseText)
+		$("#right-content").html(htmlobj.responseText)
+	})
+
+	$("#modifypassword").click(function(){
+		var htmlobj = $.ajax({url:"/html/modifypassword.html",async:false})
+		$("#right-content").html(htmlobj.responseText)
+	})
+
+	$("#setnickname").click(function(){
+		var htmlobj = $.ajax({url:"/html/setnickname.html",async:false})
+		$("#right-content").html(htmlobj.responseText)
+	})
+
+	//瀑布流加载图片
+	$("img.lazy").lazyload({		
+		load:function(){
+			$('#lanrenzhijia').BlocksIt({
+				numOfCol:4, //每行显示图片个数
+				offsetX: 8,
+				offsetY: 8
+			});
+		}
+	});	
+	$(window).scroll(function(){
+			// 当滚动到最底部以上50像素时， 加载新内容
+		if ($(document).height() - $(this).scrollTop() - $(this).height()<50){		
+			$('#lanrenzhijia').BlocksIt({
+				numOfCol:4, //每行显示图片个数
+				offsetX: 8,
+				offsetY: 8
+			});
+			$("img.lazy").lazyload();
+		}
+	});
+		
+  })
+</script>
+<%- include footer.html %>

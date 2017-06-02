@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="/javascripts/jquery-1.12.3.js"></script>
+</head>
+<script type="text/javascript">
+	$(function(){
+		var panduan=false;
+		$('#myphoto').click(function(){
+			if(panduan)
+			{
+				$('#myphoto').removeAttr('checked')
+				$(".photoclass").each(function(){
+					$(this).attr("disabled",false)
+				})
+				panduan=false
+			}else
+			{
+				$(".photoclass").each(function(){
+					$(this).attr("disabled",true).removeAttr("checked")
+				})
+				panduan=true
+		    }
+		})
+		var photoclass=[]
+	
+		$('#btn').click(function(){
+			var isok=true
+			if($('#myphoto').is(':checked'))
+			{
+				photoclass.push($('#myphoto').val())
+			}else
+			{
+				$('.photoclass').each(function(){
+					if($(this).is(':checked'))
+					{
+						photoclass.push($(this).val())
+					}
+				})
+			}
+			$('#photoclass').val(photoclass)
+			//alert($('#photoclass').val())
+			if($.trim($('#uploadimg').val())=='')
+			{
+				isok=false
+			}
+			if($.trim($('#username').val())=='')
+			{
+				isok=false
+			}
+			if($.trim($('#photoname').val())=='')
+			{
+				isok=false
+			}
+			if($.trim($('#ispublic').val())=='')
+			{
+				isok=false
+			}
+			if($.trim($('#photoclass').val())=='')
+			{
+				isok=false
+			}
+
+			if(isok)
+			{
+				return true
+				//$('#btn').submit()
+			}else
+			{
+				alert('对不起，还有内容未填写!')
+				return false
+			}
+		})
+	})
+</script>
+<style>
+	*{margin:0px; padding: 0px;}
+	body{
+		background-image: url(../images/background.jpg);
+	}
+	ul{list-style: none; margin:10px;}
+	li{
+		list-style: none; 
+		padding: 10px; 
+		width: 100%;  
+		text-align: center; 
+		color: yellow; 
+		text-shadow: 0px 0px 5px #f29;
+	}
+	#content{
+		border: solid 1px #119 ;
+		 padding: 10px; 
+		 width: 450px; 
+		 margin: 200px auto; 
+		 border-radius: 5px;
+		 box-shadow:0px 0px 20px #119;
+		 background-image: url(../images/background2.png);
+		}
+	#uploadimg{
+		background: #f22;
+		box-shadow: inset 0px 0px 20px #990;
+	}
+	#username,#photoname,#ispublic{
+		border-radius: 3px;
+		width: 120px;
+		height: 25px;
+		border: solid 1px #118;
+		box-shadow:inset 0px 0px 5px #128;
+	}
+	#btn{
+		width: 100px;
+		height: 30px;
+		box-shadow: inset 0px 0px 30px #e11;
+		font-size: 15px;
+		text-align: center;
+		line-height: 30px;
+		color:blue;
+		font-weight: bold;
+	}
+	#btn:hover{
+		background: #e1e;
+	}
+	
+</style>
+<body>
+<div id="content">
+	<form method="POST" action="/upload/photos" enctype="multipart/form-data">
+		<ul>
+			
+			<li>上传图片：<input id="uploadimg" multiple type="file" name="uploadimg"></li>
+			<li>上传用户：<input id="username" type="text" name="username" value="<%=user.name%>" readonly="true" ></li>
+			<li>图片名称：<input id="photoname" type="text" name="photoname"></li>
+		
+			<li>图片分类：
+				<input id="myphoto" type="radio" value="个人照片" >个人照片
+				<input class="photoclass" type="checkbox"  value="其他">其他
+				<br />
+				<input class="photoclass" type="checkbox"  value="自然风光">自然风光
+				<input class="photoclass" type="checkbox"  value="人文景观">人文景观
+				<input class="photoclass" type="checkbox"  value="文化娱乐">文化娱乐
+				<input class="photoclass" type="checkbox"  value="社会生活">社会生活
+				<br />
+				<input class="photoclass" type="checkbox"  value="科技之光">科技之光
+				<input class="photoclass" type="checkbox"  value="时尚名模">时尚名模
+				
+				<input class="photoclass" type="checkbox"  value="奇幻宇宙">奇幻宇宙
+				<input class="photoclass" type="checkbox"  value="古风墨韵">古风墨韵
+				<br />
+				<input class="photoclass" type="checkbox"  value="动漫绘意">动漫绘意
+				<input class="photoclass" type="checkbox"  value="日常摄影">日常摄影
+				<input class="photoclass" type="checkbox"  value="影视瞬间">影视瞬间
+				<input class="photoclass" type="checkbox"  value="神话玄幻">神话玄幻
+				
+			</li>
+			
+			<li>是否公开：
+				<select name="ispublic" id="ispublic">
+					<option value="是">是</option>
+					<option value="否">否</option>
+				</select>
+			</li>
+			<li>
+				<input id="btn" type="submit" value="上传">
+			</li>
+			<input style="display: none" type="text" name="photoclass" id="photoclass">
+		</ul>
+	</form>
+</div>
+</body>
+</html>

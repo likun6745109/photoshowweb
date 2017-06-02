@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>register</title>
+<script  src="/javascripts/jquery-1.8.0.min.js"></script>
+<script  src="/javascripts/from-register.js"></script>
+</head>
+<style type="text/css">
+	*{margin:0px; padding: 0px;}
+	body{
+		background: url(/images/background.jpg)
+	}
+	#form{
+		width:400px;
+		margin: 100px auto;
+		border-radius: 5px;
+		box-shadow:0px 0px 20px #119;
+	}
+	ul{
+		list-style: none;
+		text-align: center;
+		padding: 10px;
+	}
+	li{
+		list-style: none;
+		margin: 20px;
+		color: yellow; 
+		text-shadow: 0px 0px 5px #f29;
+	}
+	input{
+		border-radius: 3px;
+		width: 120px;
+		height: 25px;
+		border: solid 1px #118;
+		box-shadow:inset 0px 0px 5px #128;
+	}
+	#btn{
+		width: 60px;
+		box-shadow: inset 0px 0px 30px #e11;
+		color: red;
+		font-weight: bold;
+	}
+	#btn:hover{
+		background: #e1e;
+	}
+</style>
+
+<body>
+<p style="color: red; text-align: center; width: 100%; position: absolute; top: 50px;"><%=message%></p>
+<div id="form">
+<form id="regform" method="POST" action="/user/register" enctype="multipart/form-data" >
+	<ul>
+		<li>用户名：<input type="text" name="user[name]" check="required"/></li>
+		<li>密码：<input type="password" name="user[password]" check="required pw1"/></li>
+		<li>确认密码：<input type="password" name="user[qpassword]" check="required pw2"/></li>
+		<li>邮箱：<input type="text" name="user[email]" check="required email"/></li>
+		<li>手机：<input type="text" name="user[phone]" check="required phone"/></li>
+		<li><input  id="btn" type="submit" value="提交" /></li>
+	</ul>
+	
+</form>
+</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$("#regform").checkForm();
+	})
+</script>
+</html>

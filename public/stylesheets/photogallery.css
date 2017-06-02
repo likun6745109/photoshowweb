@@ -1,0 +1,121 @@
+#class-menu{
+	width: 960px;
+}
+#photoclass-ul{
+	list-style: none;
+	width: 700px;
+	height: 70px;
+	margin:0px auto;
+	padding: 10px;
+}
+#photoclass-ul li{
+	list-style: none;
+	width: 83px;
+	height: 20px;
+	margin-left: 13px;
+	margin-top: 10px;
+	float: left;
+	border: 1px solid #119;
+	text-align: center;
+	line-height: 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px #119;
+	font-size: 12px;
+	color: yellow;
+	background: #17f;
+	background: #17f;
+}
+#photoclass-ul li a{
+	font-size: 12px;
+	color: yellow;
+}
+#photoclass-ul li a:hover{
+	color: #d41;
+}
+#photoclass-ul li:hover{
+	background: #11f;
+}
+
+#search-img{
+	 	width: 960px;
+	 	height: 50px;
+	 	line-height: 50px;
+	 	margin:auto;
+	 	position: relative;
+ }
+#search-img #inputsearchimg{
+	 	width: 200px;
+	 	height: 30px;
+	 	position: absolute;
+		left: 365px;
+		top: 10px;
+		border: 1px solid #911;
+		border-radius: 5px;
+		box-shadow: inset 0px 0px 15px #919;
+}
+#search-img #submitsearchimg{
+		position: absolute;
+		left: 570px;
+		top: 11px;
+	 	width: 30px;
+	 	height:30px;
+	 	border: 0px;
+		background: url(../images/search.png);
+}
+#search-img #submitsearchimg:hover{
+		box-shadow:0px 0px 10px #119;
+		cursor: pointer;
+}
+#search-img a{
+	position: absolute;
+	color: yellow;
+	left: 800px;
+}
+#search-img a img{
+	height: 40px;
+}
+#search-img a img:hover{
+	height: 45px;
+	cursor: pointer;
+}
+
+#waterfall{
+
+}
+#lanrenzhijia{
+	position:relative;
+	width:960px; 
+	margin:20px auto;
+	list-style:none;
+	
+}
+.lanren{
+	 width:174px;
+	 float:left;
+	 box-shadow:0px 1px 3px rgba(34,25,25,0.2);
+	 overflow:hidden;
+	 padding:5px; 
+	 text-align:center; 
+	 border:1px solid #DEDCDC; 
+	 border-radius:3px; 
+	 overflow:hidden;
+	 margin-left: 8px;
+	}
+.lanren:hover{
+	box-shadow:0px 1px 3px #117;
+	 border:1px solid #117;
+}
+.lanren img{
+	 width:164px;
+	 margin-bottom:5px;
+	}
+.lanren a{ color:#fff; text-decoration:none; font-size:12px;}
+
+
+#page-number{
+	width: 960px;
+	
+	margin:20px auto;
+	text-align: center;
+	padding: 10px;
+}

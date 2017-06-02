@@ -1,0 +1,35 @@
+<%- include header.html %>
+
+<div class = "caroursel poster-main" data-setting = '{
+	"width":960,
+	"height":270,
+	"posterWidth":640,
+	"posterHeight":270,
+	"scale":0.8,
+	"dealy":"2000",
+	"algin":"middle"
+}'>
+	<ul class = "poster-list">
+		<li class = "poster-item"><img src="/images/1.jpg" width = "100%" height="100%"></li>
+		<li class = "poster-item"><img src="/images/2.jpg" width = "100%" height="100%"></li>
+		<li class = "poster-item"><img src="/images/3.jpg" width = "100%" height="100%"></li>
+		<li class = "poster-item"><img src="/images/3.jpg" width = "100%" height="100%"></li>
+		<li class = "poster-item"><img src="/images/3.jpg" width = "100%" height="100%"></li>
+		<li class = "poster-item"><img src="/images/4.jpg" width = "100%" height="100%"></li>
+		<li class = "poster-item"><img src="/images/5.jpg" width = "100%" height="100%"></li>
+		<li class = "poster-item"><img src="/images/6.jpg"  width = "100%" height="100%"></li>
+		<li class = "poster-item"><img src="/images/1.jpg"  width = "100%" height="100%"></li>
+	</ul>
+	<div class = "poster-btn poster-prev-btn"></div>
+	<div class = "poster-btn poster-next-btn"></div>
+</div>
+<!-- <script src="/javascripts/jquery.min.js"></script> -->
+<script src="/javascripts/jquery.carousel.js"></script>
+<script>
+  $(function(){
+       $(".nav").movebg({width:240/*滑块的大小*/,extra:40/*额外反弹的距离*/,speed:300/*滑块移动的速度*/,rebound_speed:400/*滑块反弹的速度*/});
+       //alert(1)
+       Caroursel.init($('.caroursel'))
+  })
+</script>
+<%- include footer.html %>

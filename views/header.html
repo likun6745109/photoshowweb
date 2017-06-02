@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>云图网</title>
+<link rel="stylesheet" href="/stylesheets/index.css" type="text/css" />
+<link rel="stylesheet" href="/stylesheets/head-nav.css" type="text/css" />
+<script src="/javascripts/jquery-1.12.3.js"></script>
+<script src="/javascripts/jquery.movebg.js"></script>
+<!-- 首页图片展示css -->
+<link type="text/css" rel="stylesheet" href="/stylesheets/carousel.css">
+</head>
+<body>
+<head id="head">
+	<div id="head-log">
+    	<p id="login-up">
+        <% if(user){%>
+          <span>欢迎您：<%=user.name%></span>|<a href="/logout">退出</a>
+        <%}else{%>
+          <a href="/login">登录</a>|<a href="/register">注册</a>
+        <%}%>
+      </p>	
+  </div>
+	<nav id="head-nav" style="z-index: 5">
+    	<div class="wraper">
+          <div class="nav">
+              <ul>
+                  <li class="nav-item"><a href='/'>首页</a></li>
+                  <li class="nav-item"><a href='/personalpage'>个人中心</a></li>
+                  <li class="nav-item"><a href='/photogallery'>图片库</a></li>
+                  <li class="nav-item"><a href='/upload/photos'>图片上传</a></li>
+                 <!--  <li class="nav-item"><a href='http://www.lanrenzhijia.com/tab/'>友情链接</a></li>
+                  <li class="nav-item"><a href='http://www.lanrenzhijia.com/jquery/'>jquery特效</a></li>
+                  <li class="nav-item"><a href='http://www.lanrenzhijia.com/service/'>在线客服</a></li>
+                  <li class="nav-item"><a href='http://www.lanrenzhijia.com/ads/'>广告代码</a></li> -->
+              </ul>
+              <!--移动的滑动-->
+              <div class="move-bg"></div>
+              <!--移动的滑动 end-->
+          </div>
+      </div>
+  </nav>
+</head>

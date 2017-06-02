@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link type="text/css" rel="stylesheet" href="stylesheets/lanrenzhijia.css">
+	<script type="text/javascript" src="/javascripts/photoshow2.js"></script>
+	<script src="/javascripts/jquery-1.12.3.js"></script>
+</head>
+<body>
+<a id="returna" >返回</a>
+	<div id="imageFlow">
+		
+		<div class="top"></div>
+		<div class="bank">
+			<!-- <a rel="images/ct37.jpg" title="Myselves" href="http://www.lanrenzhijia.com/">My identity lies in not knowing who I am</a> -->
+			<% images.forEach(function(item,index){%>
+				<a rel="<%=item.photoaddress%>" title="<%=item.photoname %>"><%=item.photoname %></a>
+			<%})%>
+		</div>
+
+		<div class="text">
+			<div class="title">Loading</div>
+			<div class="legend">Please wait...</div>
+		</div>
+		<div class="scrollbar">
+			<img class="track" src="/images/sb.gif" alt="">
+			<img class="arrow-left" src="/images/sl.gif" alt="">
+			<img class="arrow-right" src="/images/sr.gif" alt="">
+			<img class="bar" src="/images/sc.gif" alt="">
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$("#returna").click(function(){
+			window.history.back(-1);
+		})
+	})
+	</script>
+<br>
+<br>
+<br>
+
+
+</body>
+</html>

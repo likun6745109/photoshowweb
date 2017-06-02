@@ -1,0 +1,10 @@
+
+.caroursel{margin:50px auto;}
+/*²å¼þÑùÊ½*/
+.poster-main{position: relative;width: 900px;height: 270px}
+.poster-main a,.poster-main img{display:block;}
+.poster-main .poster-list{width: 900px;height: 270px}
+.poster-main .poster-list .poster-item{position: absolute;left: 0px;top: 0px}
+.poster-main .poster-btn{position: absolute;height: 100%;width:100px;top: 0px;z-index: 10;opacity: 0.5;}
+.poster-main .poster-prev-btn{ left: 0px; background: url("/images/btn_l.png") no-repeat center center; background-color: #000 }
+.poster-main .poster-next-btn{right: 0px;background: url("/images/btn_r.png") no-repeat center center;background-color:#000}

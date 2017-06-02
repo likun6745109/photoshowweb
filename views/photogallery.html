@@ -1,0 +1,107 @@
+<%- include header.html %>
+<link rel="stylesheet" href="/stylesheets/photogallery.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/pagination.css" media="screen">
+<div id="content">
+	<div id="class-menu">
+		<ul id="photoclass-ul">
+			<li><a href="/search/photo/class?photoclass=自然风光" >自然风光</a></li>
+			<li><a href="/search/photo/class?photoclass=人文景观" >人文景观</a></li>
+			<li><a href="/search/photo/class?photoclass=文化娱乐" >文化娱乐</a></li>
+			<li><a href="/search/photo/class?photoclass=社会生活" >社会生活</a></li>
+			<li><a href="/search/photo/class?photoclass=科技之光" >科技之光</a></li>
+			<li><a href="/search/photo/class?photoclass=时尚名模" >时尚名模</a></li>
+			<li><a href="/search/photo/class?photoclass=奇幻宇宙" >奇幻宇宙</a></li>
+			<br />
+			<li><a href="/search/photo/class?photoclass=古风墨韵" >古风墨韵</a></li>
+			<li><a href="/search/photo/class?photoclass=动漫绘意" >动漫绘意</a></li>
+			<li><a href="/search/photo/class?photoclass=日常摄影" >日常摄影</a></li>
+			<li><a href="/search/photo/class?photoclass=影视瞬间" >影视瞬间</a></li>
+			<li><a href="/search/photo/class?photoclass=神话玄幻" >神话玄幻</a></li>
+			<li><a href="/search/photo/class?photoclass=个人照片" >个人照片</a></li>
+			<li><a href="/search/photo/class?photoclass=其他" >其他</a></li>
+		</ul>
+	</div>
+
+	<div id="search-img">
+		<form method="post" action="/search/photo/keyword">
+			<input id="inputsearchimg" placeholder="图片搜索" type="text" name="searchimg">
+			<input id="submitsearchimg" type="submit" name="" value="">
+		</form>
+		<a href="/photoshow"><img src="/images/play.png"></a>
+	</div>
+
+	<div id="waterfall">
+		<div id="lanrenzhijia">
+			<% images.forEach(function(item,index){%>
+   			  <div class="lanren">
+     			 <img class="lazy" src="<%=item.photoaddress %>" data-original="<%=item.photoaddress%>" />
+     			 <a href="#"><%=item.photoname %></a>
+     			 &nbsp
+     			 <a href="/download/image/<%=item._id%>">下载</a>
+  			  </div>
+  			<%})%>
+		</div>
+	</div>
+
+
+
+	<div id="page-number">
+		<div class="M-box3"></div>
+	</div>
+
+	
+</div>
+
+<script src="/javascripts/photogallery-jquery.lazyload.min.js"></script>
+<script src="/javascripts/photogallery-blocksit.min.js"></script>
+<script src="/javascripts/jquery.pagination.js"></script>
+<script>
+  $(function(){
+  	var totalpage = "<%= totalpage %>";//总页数
+  	var p = "<%=page%>"
+       $(".nav").movebg({width:240/*滑块的大小*/,extra:40/*额外反弹的距离*/,speed:300/*滑块移动的速度*/,rebound_speed:400/*滑块反弹的速度*/}); 
+
+       $("img.lazy").lazyload({		//data-original来激活
+		load:function(){
+			$('#lanrenzhijia').BlocksIt({
+				numOfCol:5, //每行显示图片个数
+				offsetX: 8,
+				offsetY: 8
+			});
+		}
+		});	
+		$(window).scroll(function(){
+			// 当滚动到最底部以上50像素时， 加载新内容
+			if ($(document).height() - $(this).scrollTop() - $(this).height()<50){		
+			$('#lanrenzhijia').BlocksIt({
+				numOfCol:5, //每行显示图片个数
+				offsetX: 8,
+				offsetY: 8
+			});
+			$("img.lazy").lazyload();
+		}
+		});
+
+		$('.M-box3').pagination({
+   			 pageCount:totalpage,
+  			 jump:true,
+   			 coping:true,
+   			 current:p,
+   			 homePage:'首页',
+  			 endPage:'末页',
+  			 prevContent:'上页',
+  			 nextContent:'下页'
+		});
+
+		$('#submitsearchimg').click(function(){
+				if($.trim($('#inputsearchimg').val())=='')
+				{
+					return false;
+				}else
+				{
+					return true;
+				}
+			})
+  })
+</script>
+<%- include footer.html %>
